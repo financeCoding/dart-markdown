@@ -6,6 +6,7 @@
 library markdown;
 
 import 'src/classify/dart.dart';
+import 'src/classify/html.dart';
 
 // TODO(rnystrom): Use "package:" URL (#4968).
 part 'src/markdown/ast.dart';
@@ -49,6 +50,7 @@ class Document {
   
   String classify(String syntax, String source) {
     if (syntax == 'dart') return classifyDart(source);
+    if (syntax == 'html') return classifyHtml(source);
     if (classifier == null) return source;
     return classifier(syntax, source);
   }

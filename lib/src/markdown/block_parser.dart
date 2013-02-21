@@ -315,7 +315,7 @@ class BlockHtmlSyntax extends BlockSyntax {
       parser.advance();
     }
 
-    return new Text(Strings.join(childLines, '\n'));
+    return new Text(childLines.join('\n'));
   }
 }
 
@@ -497,8 +497,7 @@ class ParagraphSyntax extends BlockSyntax {
       parser.advance();
     }
 
-    final contents = parser.document.parseInline(
-        Strings.join(childLines, '\n'));
+    final contents = parser.document.parseInline(childLines.join('\n'));
     return new Element('p', contents);
   }
 }
