@@ -6,6 +6,7 @@ library classify;
 
 import 'package:analyzer_experimental/src/generated/java_core.dart';
 import 'package:analyzer_experimental/src/generated/scanner.dart';
+import '../../markdown.dart';
 
 class Classification {
   static const NONE = "";
@@ -42,9 +43,12 @@ String classifyDart(String src) {
         || token.type == TokenType.STRING_INTERPOLATION_IDENTIFIER);
     var stringClass = inString ? ' ${Classification.STRING_INTERPOLATION}' : '';
     var kind = classify(token);
-    out.add('<span class="$kind$stringClass">$token</span>');
+    out.add('<span class="$kind$stringClass">${escapeHtml(token.lexeme)}</span>');
     token = token.next;
   }
+  // Add remaining whitespace.
+  out.add(src.slice(pos, token.offset));
+  
   return out.toString();
 }
 
